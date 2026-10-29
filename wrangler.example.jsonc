@@ -1,0 +1,37 @@
+// Cloudflare Workers config template.
+// Copy this to `wrangler.jsonc` and fill in your values, OR let the
+// /deploy-cloudflare skill do it for you on first deploy.
+// The real `wrangler.jsonc` is gitignored — it carries per-project IDs.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "shipany-vinext",
+  "compatibility_date": "2026-02-12",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "vinext/server/app-router-entry",
+  "assets": {
+    "not_found_handling": "none",
+  },
+  "vars": {
+    "DATABASE_PROVIDER": "d1",
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "shipany-vinext",
+      "database_id": "REPLACE_WITH_OUTPUT_OF_WRANGLER_D1_CREATE",
+      "migrations_dir": "drizzle",
+    },
+  ],
+  // ── Postgres via Hyperdrive (instead of D1) ────────────────────────────────
+  // 1. npx wrangler hyperdrive create <name> --connection-string="postgres://user:pass@host:5432/db"
+  // 2. Set vars.DATABASE_PROVIDER to "postgresql" and remove the d1_databases block
+  // 3. Uncomment and fill the binding (the build keeps the postgres driver in
+  //    the bundle when DATABASE_PROVIDER=postgresql — see vite.config.ts):
+  // "hyperdrive": [
+  //   { "binding": "HYPERDRIVE", "id": "REPLACE_WITH_OUTPUT_OF_WRANGLER_HYPERDRIVE_CREATE" }
+  // ]
+  //
+  // Other optional bindings — uncomment when needed:
+  // "kv_namespaces":  [{ "binding": "CACHE",  "id": "..." }],
+  // "r2_buckets":     [{ "binding": "BUCKET", "bucket_name": "..." }]
+}

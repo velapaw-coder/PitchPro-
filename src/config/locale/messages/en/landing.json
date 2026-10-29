@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "features": "Capabilities",
+    "pricing": "Plans",
+    "workbench": "Workbench"
+  },
+  "hero": {
+    "headline": "Co-create your customer’s next growth product line",
+    "subheadline": "pitchpro is an overseas brand new-category growth platform for factories and trading companies. Starting from brand needs, the AI workbench runs Brief → Design → Assets → Follow-up—turning design, R&D, and flexible supply-chain strengths into brand-ready proposals you can send out.",
+    "cta": "Open workbench",
+    "secondary": "See the four steps"
+  },
+  "chips": {
+    "brief": "Brief",
+    "design": "Design",
+    "assets": "Assets",
+    "followup": "Follow-up",
+    "brands": "Light brand search",
+    "shelf": "Private shelf",
+    "knowledge": "Enterprise library",
+    "ghl": "GHL follow-up"
+  },
+  "features": {
+    "title": "One continuous co-creation path",
+    "description": "Chat to advance; results grow on the side. Capabilities stay behind the scenes—the UI always follows Brief · Design · Assets · Follow-up.",
+    "brief": {
+      "title": "Brief",
+      "description": "Upload factory materials, paste a brand site, or set country + category and pick from light search cards. The agent builds capability profiles, brand portraits, opportunity notes, and a design brief—clearly marking confirmed facts, inferences, and items to verify."
+    },
+    "design": {
+      "title": "Design",
+      "description": "Explore look, color, materials, and scenes from the confirmed brief. Lock a visual direction for later assets; structure, process, and manufacturability stay with the factory to confirm."
+    },
+    "assets": {
+      "title": "Assets",
+      "description": "Generate concept art, product proposals, detail pages, video, and outreach copy from the same locked direction. When the core brief changes, related assets are marked for update."
+    },
+    "followup": {
+      "title": "Follow-up",
+      "description": "After review, sync contacts, proposals, and copy to GoHighLevel for outreach and nurture. Replies and opportunity signals return to the same brand project to drive sampling and deals."
+    },
+    "brands": {
+      "title": "Light brand search + private shelf",
+      "description": "In-chat public search returns structured brand cards (tone, hero image, site/social). Open a project or save to your private shelf—no heavy platform encyclopedia or weekly seed crawls."
+    },
+    "knowledge": {
+      "title": "Enterprise library",
+      "description": "Store design cases, processes, and supply-chain capability across projects. Supply lives in the library; target brands enter via link or light search—co-creation always starts from brand needs."
+    }
+  },
+  "pricing": {
+    "title": "Plans",
+    "description": "For factory and trading teams from pilot to scale (commercial terms via sales).",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "lifetime": "Lifetime",
+    "popular": "Popular",
+    "best_value": "Best value",
+    "buy_lifetime": "Long-term license",
+    "starter": "Pilot",
+    "starter_desc": "Run the first co-creation loop with a small team",
+    "pro": "Team",
+    "pro_desc": "More projects, brands, and generation capacity",
+    "enterprise": "Enterprise",
+    "enterprise_desc": "Deep research, engineering review, and marketing setup add-ons",
+    "feature_1_project": "Pilot project quota",
+    "feature_5k_credits": "Generation pack",
+    "feature_email_support": "Email support",
+    "feature_unlimited_projects": "Multi-brand projects",
+    "feature_50k_credits": "Larger generation pack",
+    "feature_priority_support": "Priority support",
+    "feature_api_access": "GHL / export hooks",
+    "feature_everything_pro": "Everything in Team",
+    "feature_unlimited_credits": "Usage & add-ons by agreement",
+    "feature_dedicated_support": "Dedicated support",
+    "feature_custom_integrations": "Custom integrations & training"
+  },
+  "faq": {
+    "title": "FAQ",
+    "description": "A few things to know before you start co-creating.",
+    "who": {
+      "question": "Who uses pitchpro, and who is the co-creation partner?",
+      "answer": "Paying users are factories, trading companies, and their sales teams. Co-creation and order partners are overseas emerging and growth brands. pitchpro helps factories become new-category growth partners for those brands."
+    },
+    "loop": {
+      "question": "What do the four steps cover?",
+      "answer": "Brief: understand capability and brand needs, confirm positioning and design brief. Design: explore and lock visual direction. Assets: produce concept art, proposals, detail pages, video, and outreach from one source. Follow-up: sync to GoHighLevel and iterate from feedback."
+    },
+    "brands": {
+      "question": "Where do brands come from—is this an encyclopedia?",
+      "answer": "No. Brands enter via in-chat light search cards plus a private shelf, or by pasting a site/social link. There is no heavy platform seed database or industry-wide weekly crawl."
+    },
+    "ai": {
+      "question": "Does AI replace engineering and sampling?",
+      "answer": "No. pitchpro separates confirmed facts, inferences, and items to verify. Concept design does not replace engineering drawings, sample tests, or market validation—factories confirm structure, performance, and manufacturability."
+    },
+    "value": {
+      "question": "How is this different from catalogs and quotes?",
+      "answer": "Outreach starts earlier—at brand research and new-category co-creation. Teams bring grounded concepts, designs, and scene assets to discuss the brand’s next growth line, moving from supplier intros to concrete collaboration."
+    }
+  },
+  "cta": {
+    "headline": "From supplier intro to new-category co-creation",
+    "subheadline": "With one enterprise pack and one target brand, run Brief → Design → Assets → Follow-up. Co-create your customer’s next growth product line.",
+    "button": "Open workbench"
+  },
+  "footer": {
+    "tagline": "pitchpro · Overseas brand new-category growth platform",
+    "feature": "Product",
+    "product": "Entry",
+    "resources": "Resources",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "settings": "Settings",
+    "admin": "Admin",
+    "docs": "Docs",
+    "github": "GitHub",
+    "workbench": "Workbench"
+  }
+}

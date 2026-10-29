@@ -1,0 +1,115 @@
+{
+  "metadata": {
+    "title": "呈品",
+    "description": "面向工厂与外贸企业的海外品牌新品类增长平台。共创客户的下一条增长产品线。聊方案 · 选设计 · 出素材 · 做跟进。"
+  },
+  "sign": {
+    "sign_in_title": "登录",
+    "sign_in_description": "欢迎回来",
+    "sign_up_title": "注册",
+    "sign_up_description": "免费开始使用",
+    "email_title": "邮箱",
+    "email_placeholder": "输入邮箱地址",
+    "password_title": "密码",
+    "password_placeholder": "输入密码",
+    "confirm_password_title": "确认密码",
+    "confirm_password_placeholder": "再次输入密码",
+    "password_mismatch": "两次输入的密码不一致",
+    "name_title": "姓名",
+    "name_placeholder": "输入姓名",
+    "no_account": "还没有账号？",
+    "already_have_account": "已有账号？",
+    "or": "或者继续使用",
+    "sign_out_title": "退出登录",
+    "google_sign_in": "使用 Google 登录",
+    "github_sign_in": "使用 GitHub 登录",
+    "no_methods_title": "暂无可用的登录方式",
+    "no_methods_description": "管理员尚未启用任何登录方式，请稍后再试。",
+    "forgot_password": "忘记密码？",
+    "forgot_password_title": "找回密码",
+    "forgot_password_description": "输入你的邮箱，我们将发送密码重置链接。",
+    "send_reset_link": "发送重置链接",
+    "reset_link_sent_title": "请查收邮件",
+    "reset_link_sent_description": "如果 {email} 已注册账号，我们已发送密码重置链接，请在 1 小时内完成重置。",
+    "back_to_sign_in": "返回登录",
+    "reset_password_title": "重置密码",
+    "reset_password_description": "为你的账号设置新密码。",
+    "new_password_title": "新密码",
+    "new_password_placeholder": "输入新密码",
+    "confirm_new_password_placeholder": "再次输入新密码",
+    "reset_password_submit": "重置密码",
+    "reset_password_success": "密码已重置，请使用新密码登录。",
+    "reset_password_invalid_token": "重置链接无效或已过期，请重新申请。",
+    "reset_password_missing_token": "缺少重置令牌，请从邮件中打开链接。",
+    "password_reset_unavailable_title": "暂无法找回密码",
+    "password_reset_unavailable_description": "管理员尚未配置邮件服务，无法发送重置链接，请联系客服。",
+    "verify_email_page_title": "请查收邮件",
+    "verify_email_page_description": "继续操作前，请点击发送到以下邮箱的验证链接：",
+    "verify_email_continue": "继续",
+    "verify_email_tip": "完成验证后，请点击「继续」按钮。",
+    "verify_email_not_verified_yet": "尚未完成验证，请先前往邮箱点击验证链接。",
+    "verify_email_send_failed": "发送验证邮件失败",
+    "verify_email_email_required": "邮箱不能为空",
+    "resend_verification": "重新发送验证邮件",
+    "resend_verification_countdown": "{seconds} 秒后可重新发送",
+    "invite_code_title": "邀请码",
+    "invite_code_placeholder": "请输入邀请码",
+    "invite_code_required": "请输入邀请码",
+    "invite_code_invalid": "邀请码无效",
+    "redeem_title": "输入邀请码",
+    "redeem_description": "本应用为邀请制,请输入有效的邀请码以继续。",
+    "redeem_submit": "继续"
+  },
+  "pricing": {
+    "get_started": "立即开始",
+    "processing": "处理中...",
+    "choose_payment": "选择支付方式",
+    "choose_payment_desc": "选择你想使用的支付渠道。",
+    "payment_for": "{plan} — {price}",
+    "payment_for_plan": "{plan}"
+  },
+  "systems": {
+    "label": "切换系统",
+    "admin": "管理后台",
+    "settings": "设置",
+    "home": "首页",
+    "workbench": "工作台"
+  },
+  "search": {
+    "placeholder": "搜索..."
+  },
+  "table": {
+    "no_data": "暂无数据",
+    "total": "共 {count} 条记录",
+    "page_info": "第 {current} 页，共 {total} 页",
+    "previous": "上一页",
+    "next": "下一页",
+    "refresh": "刷新"
+  },
+  "nav": {
+    "settings": "设置",
+    "billing": "账单",
+    "apikeys": "API 密钥",
+    "profile": "个人资料",
+    "sign_in": "登录",
+    "get_started": "开始使用",
+    "theme_light": "浅色模式",
+    "theme_dark": "深色模式",
+    "theme_system": "跟随系统",
+    "workbench": "工作台"
+  },
+  "not_found": {
+    "message": "页面不存在",
+    "back_home": "返回首页"
+  },
+  "error": {
+    "title": "出错了",
+    "message": "页面出现了一些问题，请重试。",
+    "retry": "重试",
+    "back_home": "返回首页"
+  },
+  "pages": {
+    "back_to_home": "返回首页",
+    "last_updated": "最近更新"
+  }
+}

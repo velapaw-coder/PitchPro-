@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "features": "能力",
+    "pricing": "方案",
+    "workbench": "工作台"
+  },
+  "hero": {
+    "headline": "共创客户的下一条增长产品线",
+    "subheadline": "呈品是面向工厂与外贸企业的海外品牌新品类增长平台。以海外品牌需求为起点，用 AI 工作台完成聊方案、选设计、出素材、做跟进，把设计、研发与柔性供应链能力组织成可外发的品牌专属方案。",
+    "cta": "进入工作台",
+    "secondary": "了解四步路径"
+  },
+  "chips": {
+    "brief": "聊方案",
+    "design": "选设计",
+    "assets": "出素材",
+    "followup": "做跟进",
+    "brands": "品牌轻搜",
+    "shelf": "企业私库",
+    "knowledge": "企业资料库",
+    "ghl": "GHL 跟进"
+  },
+  "features": {
+    "title": "一条连续的新品共创路径",
+    "description": "对话推进，右侧长出成果。复杂能力在后台组织，界面始终沿用四步：聊方案 · 选设计 · 出素材 · 做跟进。",
+    "brief": {
+      "title": "聊方案",
+      "description": "上传企业资料、贴目标品牌链接，或仅定国家与赛道后经轻搜索点选。Agent 整理能力档案、品牌画像、机会判断与设计简报，并标清已确认、推断与待验证。"
+    },
+    "design": {
+      "title": "选设计",
+      "description": "按确认后的定位与简报探索外观、配色、材质与场景表达。锁定选定视觉作为后续素材依据；结构、工艺与制造可行性交由工厂确认。"
+    },
+    "assets": {
+      "title": "出素材",
+      "description": "同源生成概念图、产品提案、叙事长图、视频与开发信，供品牌沟通与外发。修改核心方案后，系统标记需更新的相关素材。"
+    },
+    "followup": {
+      "title": "做跟进",
+      "description": "审核素材包后，将客户、提案与文案同步至 GoHighLevel，执行触达与跟进。回复与商机回传同一品牌项目，推动打样与合作。"
+    },
+    "brands": {
+      "title": "品牌轻搜 + 企业私库",
+      "description": "对话内公开检索出结构化品牌卡片（调性、主图、官网/社媒），点选开项目或存入企业私库。不做平台级重种子库或百科运营。"
+    },
+    "knowledge": {
+      "title": "企业资料库",
+      "description": "跨项目沉淀设计案例、工艺与供应链能力。供给能力在企业库，目标品牌由链接或轻搜进入项目，共创始终以品牌需求为起点。"
+    }
+  },
+  "pricing": {
+    "title": "方案",
+    "description": "面向工厂与外贸团队试点与规模化使用（具体定价以商务沟通为准）。",
+    "monthly": "月付",
+    "yearly": "年付",
+    "lifetime": "买断",
+    "popular": "常用",
+    "best_value": "更优",
+    "buy_lifetime": "长期授权",
+    "starter": "试点版",
+    "starter_desc": "少量业务员跑通首条共创链路",
+    "pro": "团队版",
+    "pro_desc": "多项目、多品牌与素材产能",
+    "enterprise": "企业版",
+    "enterprise_desc": "深度研究、工程评估与营销配置等增值服务",
+    "feature_1_project": "试点项目配额",
+    "feature_5k_credits": "生成用量包",
+    "feature_email_support": "邮件支持",
+    "feature_unlimited_projects": "多品牌项目",
+    "feature_50k_credits": "更大生成用量",
+    "feature_priority_support": "优先支持",
+    "feature_api_access": "GHL / 导出对接",
+    "feature_everything_pro": "含团队版能力",
+    "feature_unlimited_credits": "用量与增值协商",
+    "feature_dedicated_support": "专属支持",
+    "feature_custom_integrations": "定制集成与培训"
+  },
+  "faq": {
+    "title": "常见问题",
+    "description": "开始共创前你可能想了解的几点。",
+    "who": {
+      "question": "谁在用呈品？谁是共创对象？",
+      "answer": "付费使用者是工厂、外贸公司及其业务团队；共创与合作下单对象是海外本土新锐及成长型品牌。呈品帮助工厂与外贸成为品牌客户的新品类增长伙伴。"
+    },
+    "loop": {
+      "question": "四步路径具体做什么？",
+      "answer": "聊方案：理解企业能力与品牌需求，确认产品定位与设计简报。选设计：探索并锁定视觉方向。出素材：同源产出概念图、提案、叙事长图、视频与开发信。做跟进：同步 GoHighLevel，回传客户反馈并持续迭代。"
+    },
+    "brands": {
+      "question": "品牌从哪里来？是不是百科库？",
+      "answer": "不是。品牌入口是对话内轻搜索推荐卡片 + 企业私库沉淀；也可直接贴官网/社媒开项目。平台不做重种子库或按行业周更采集的百科运营。"
+    },
+    "ai": {
+      "question": "AI 会替代工程与打样吗？",
+      "answer": "不会。呈品区分已确认事实、推断与待验证条件。概念设计不能替代工程图、样品测试或市场验证；结构、性能、工艺与制造可行性需工厂或专业人员确认。"
+    },
+    "value": {
+      "question": "和发目录、报价有什么不同？",
+      "answer": "客户开发起点前移到品牌研究与新品共创。团队带着有依据的产品构想、设计方案和场景素材，与品牌讨论下一条增长产品线，让沟通从供应能力介绍进入具体合作。"
+    }
+  },
+  "cta": {
+    "headline": "从供应介绍，走向新品共创",
+    "subheadline": "用一份企业资料和一个目标品牌，跑通聊方案 → 选设计 → 出素材 → 做跟进。共创客户的下一条增长产品线。",
+    "button": "打开工作台"
+  },
+  "footer": {
+    "tagline": "呈品 · 海外品牌新品类增长平台",
+    "feature": "产品",
+    "product": "入口",
+    "resources": "资源",
+    "legal": "法律信息",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "settings": "设置",
+    "admin": "管理后台",
+    "docs": "文档",
+    "github": "GitHub",
+    "workbench": "工作台"
+  }
+}

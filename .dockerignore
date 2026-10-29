@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.example
+.next
+.vercel
+.vscode
+.claude
+data
+node_modules
+docs
+.git
+drizzle
+public/uploads
