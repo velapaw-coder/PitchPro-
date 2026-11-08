@@ -102,6 +102,13 @@ export type ApiDeliverable = {
   status: string;
 };
 
+export type ApiProposalWorkflowState = {
+  stage?: string;
+  missingData?: string[];
+  approvedVisualCount?: number;
+  pageSummary?: string;
+};
+
 export type ApiGhlHistoryItem = {
   id: string;
   mode: string;
@@ -619,6 +626,9 @@ export const pitchApi = {
         items: ApiDeliverable[];
         lockedDesignId: string | null;
         stage: string;
+        proposalWorkflow?: {
+          state?: ApiProposalWorkflowState | null;
+        } | null;
         proposalChatMessage?: ApiChatMessage;
         videoChatMessage?: ApiChatMessage;
         videoPrecheck?: ApiVideoRefPrecheck;

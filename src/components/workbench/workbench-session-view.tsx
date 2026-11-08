@@ -4,6 +4,14 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import { useRouter } from '@/core/i18n/navigation';
+import {
+  buildPdpNarrativeIntro,
+  formatNarrativeChatMessage,
+} from '@/modules/pitchpro/pdp-copy';
+import {
+  bumpReachedStep,
+  evaluateProposalVideoEntry,
+} from '@/modules/pitchpro/proposal-video-gate';
 import { Badge } from '@/components/ui/badge';
 
 import {
@@ -14,36 +22,28 @@ import {
   type ApiProject,
 } from './api-client';
 import { BrandShelfDialog } from './brand-shelf-dialog';
+import { EnterpriseLibraryDialog } from './enterprise-library-dialog';
 import {
   emitDesignsGenerating,
   emitLongImagesGenerating,
   emitProjectsChanged,
   emitVideoGenerating,
 } from './events';
-import { EnterpriseLibraryDialog } from './enterprise-library-dialog';
-import { getMockSession, STAGE_FROM_STEP, STEP_ORDER, stepFromStage } from './mock-sessions';
-import type { WorkbenchStepId } from './types';
 import {
-  buildPdpNarrativeIntro,
-  formatNarrativeChatMessage,
-} from '@/modules/pitchpro/pdp-copy';
+  getMockSession,
+  STAGE_FROM_STEP,
+  STEP_ORDER,
+  stepFromStage,
+} from './mock-sessions';
+import type { WorkbenchStepId } from './types';
 import { WorkbenchChatPane } from './workbench-chat-pane';
 import { WorkbenchResultsPane } from './workbench-results-pane';
 import { WorkbenchSteps } from './workbench-steps';
 
-function reachedFromStage(stage: string): WorkbenchStepId {
-  // Furthest unlocked step for top-bar navigation (flow A).
-  if (stage === 'followup') return 'followup';
-  if (stage === 'assets') return 'assets';
-  if (stage === 'video') return 'video';
-  if (stage === 'proposal') return 'proposal';
-  if (stage === 'pdp') return 'pdp';
-  if (stage === 'design') return 'design';
-  return 'brief';
-}
-
-
-function formatDesignsChatMessage(items: ApiDesignConcept[], source: 'load' | 'regen') {
+function formatDesignsChatMessage(
+  items: ApiDesignConcept[],
+  source: 'load' | 'regen'
+) {
   const maxVersion = items.reduce((m, c) => Math.max(m, c.version || 0), 0);
   // On regen, only announce the newly appended batch to avoid re-flooding chat with old images
   const batch =
@@ -79,6 +79,8 @@ export function WorkbenchSessionView({ sessionId }: { sessionId: string }) {
   const [designTick, setDesignTick] = useState(0);
   const [deliverTick, setDeliverTick] = useState(0);
   const [pdpTick, setPdpTick] = useState(0);
+  const [proposalUnlock, setProposalUnlock] = useState(false);
+  const [stepNotice, setStepNotice] = useState('');
   const designAnnounceRef = useRef<string | null>(null);
 
   const load = useCallback(async () => {
@@ -139,7 +141,6 @@ export function WorkbenchSessionView({ sessionId }: { sessionId: string }) {
     []
   );
 
-
   const pushDesignsToChat = useCallback(
     async (
       projectId: string,
@@ -176,13 +177,72 @@ export function WorkbenchSessionView({ sessionId }: { sessionId: string }) {
     }
   }, []);
 
-  function onStepChange(next: WorkbenchStepId) {
+  useEffect(() => {
+    if (!project?.id) {
+      setProposalUnlock(false);
+      return;
+    }
+    let cancel = false;
+    async function refreshProposalUnlock() {
+      try {
+        const res = await pitchApi.listDeliverables(project!.id);
+        if (cancel) return;
+        const item = res.items.find((row) => row.kind === 'proposal');
+        const decision = evaluateProposalVideoEntry({
+          lockedDesign: !!project!.lockedDesignId,
+          projectStage: project!.stage,
+          fileUrl: item?.fileUrl,
+          content: item?.content,
+          workflow: res.proposalWorkflow?.state || null,
+        });
+        setProposalUnlock(decision.unlockStep);
+      } catch {
+        if (!cancel) setProposalUnlock(false);
+      }
+    }
+    void refreshProposalUnlock();
+    const onAssets = () => void refreshProposalUnlock();
+    window.addEventListener('pitchpro:assets-changed', onAssets);
+    return () => {
+      cancel = true;
+      window.removeEventListener('pitchpro:assets-changed', onAssets);
+    };
+  }, [project?.id, project?.lockedDesignId, project?.stage, deliverTick]);
+
+  async function onStepChange(next: WorkbenchStepId) {
     if (!project) return;
-    const max = reachedFromStage(project.stage);
+    const max = bumpReachedStep(project.stage, proposalUnlock);
     const order = STEP_ORDER.map((s) => s.id);
     const nextIdx = order.indexOf(next);
     const maxIdx = order.indexOf(max);
     if (nextIdx < 0 || maxIdx < 0 || nextIdx > maxIdx) return;
+    if (
+      next === 'video' &&
+      (project.stage === 'proposal' || project.stage === '产品提案')
+    ) {
+      setStepNotice('');
+      try {
+        const res = await pitchApi.advanceToVideo(project.id);
+        if (res.project) {
+          setProject(res.project);
+          emitProjectsChanged();
+        }
+        if (res.videoChatMessage?.id) {
+          window.dispatchEvent(
+            new CustomEvent('pitchpro:chat-message', {
+              detail: res.videoChatMessage,
+            })
+          );
+        }
+        setDeliverTick((n) => n + 1);
+        setStepId('video');
+        window.dispatchEvent(new CustomEvent('pitchpro:assets-changed'));
+      } catch (e: any) {
+        setStepNotice(e?.message || '进入场景视频失败');
+      }
+      return;
+    }
+    setStepNotice('');
     setStepId(next);
   }
 
@@ -202,7 +262,7 @@ export function WorkbenchSessionView({ sessionId }: { sessionId: string }) {
     );
   }
 
-  const reachedStep = reachedFromStage(project.stage);
+  const reachedStep = bumpReachedStep(project.stage, proposalUnlock);
 
   const resultsProps = {
     project,
@@ -278,10 +338,18 @@ export function WorkbenchSessionView({ sessionId }: { sessionId: string }) {
         </div>
         <WorkbenchSteps
           activeStep={stepId}
-          onStepChange={onStepChange}
+          onStepChange={(id) => void onStepChange(id)}
           reachedStep={reachedStep}
         />
       </div>
+      {stepNotice && (
+        <p
+          role="status"
+          className="border-b px-4 py-2 text-[11px] leading-relaxed text-amber-800 dark:text-amber-200"
+        >
+          {stepNotice}
+        </p>
+      )}
 
       <div className="flex min-h-0 flex-1 flex-col md:flex-row">
         <WorkbenchChatPane
@@ -437,7 +505,9 @@ export function WorkbenchSessionView({ sessionId }: { sessionId: string }) {
                   emitProjectsChanged();
                 }
                 setDeliverTick((n) => n + 1);
-                window.dispatchEvent(new CustomEvent('pitchpro:assets-changed'));
+                window.dispatchEvent(
+                  new CustomEvent('pitchpro:assets-changed')
+                );
                 if (tick.chatMessage) {
                   window.dispatchEvent(
                     new CustomEvent('pitchpro:chat-message', {
