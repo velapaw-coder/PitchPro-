@@ -38,6 +38,7 @@ import {
   VIDEO_MARKER,
   toApiChatMessage,
 } from './chat-serialize';
+import { evaluateProposalVideoEntry } from './proposal-video-gate';
 import {
   downloadLk888VideoContent,
   getLk888VideoTask,
@@ -3933,12 +3934,17 @@ export async function advanceToVideo(
       )
       .orderBy(desc(pitchDeliverable.createdAt))
       .limit(1);
-    const fileUrl = proposalRows[0]?.fileUrl || '';
-    const hasPdf =
-      !!fileUrl &&
-      (fileUrl.startsWith('/') || /^https?:\/\//i.test(fileUrl));
-    if (!hasPdf) {
-      throw new Error('请先点「确认并生成 PDF」再进入场景视频');
+    const proposal = proposalRows[0];
+    const decision = evaluateProposalVideoEntry({
+      lockedDesign: true,
+      projectStage: project.stage,
+      fileUrl: proposal?.fileUrl,
+      content: proposal?.content,
+    });
+    if (!decision.allow) {
+      throw new Error(
+        decision.summary || '请先点「确认并生成 PDF」再进入场景视频'
+      );
     }
   }
 

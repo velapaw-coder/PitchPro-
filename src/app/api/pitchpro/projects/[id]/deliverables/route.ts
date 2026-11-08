@@ -1,5 +1,6 @@
-import * as pitch from '@/modules/pitchpro/service';
 import { requireUser } from '@/modules/pitchpro/auth';
+import { readProposalWorkflow } from '@/modules/pitchpro/proposal-video-gate';
+import * as pitch from '@/modules/pitchpro/service';
 import { respData, respErr } from '@/lib/resp';
 
 type Ctx = { params: Promise<{ id: string }> };
@@ -58,10 +59,15 @@ export async function GET(_req: Request, ctx: Ctx) {
       videoPrecheck =
         (await pitch.getVideoRefPrecheck(user.id, id)) || undefined;
     }
+    const proposalItem = items.find((item) => item.kind === 'proposal');
+    const proposalWorkflowState = readProposalWorkflow(proposalItem?.content);
     return respData({
       items,
       lockedDesignId: project.lockedDesignId,
       stage: project.stage,
+      proposalWorkflow: proposalWorkflowState
+        ? { state: proposalWorkflowState }
+        : null,
       proposalChatMessage,
       videoChatMessage,
       videoPrecheck,
@@ -116,10 +122,7 @@ export async function POST(req: Request, ctx: Ctx) {
       return respData(result);
     }
 
-    if (
-      body.action === 'confirm-video' ||
-      body.action === 'confirm_video'
-    ) {
+    if (body.action === 'confirm-video' || body.action === 'confirm_video') {
       const result = await pitch.confirmVideo(user.id, id);
       return respData(result);
     }
@@ -143,8 +146,7 @@ export async function POST(req: Request, ctx: Ctx) {
       (await pitch.ensureProposalChatMessage(user.id, id, { force })) ||
       undefined;
     const videoChatMessage =
-      (await pitch.ensureVideoChatMessage(user.id, id, { force })) ||
-      undefined;
+      (await pitch.ensureVideoChatMessage(user.id, id, { force })) || undefined;
     return respData({
       items,
       lockedDesignId: designId,
