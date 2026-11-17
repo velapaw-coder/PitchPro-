@@ -1,7 +1,10 @@
 import { betterAuth, type BetterAuthOptions } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
+import { APIError } from 'better-auth/api';
 import { oneTap } from 'better-auth/plugins';
+import { eq } from 'drizzle-orm';
 
+import { newAccountDecision } from '@/core/auth/registration-gate';
 import { db } from '@/core/db';
 import type { EmailProvider } from '@/core/email';
 import { CloudflareEmailProvider } from '@/core/email/cloudflare';
@@ -28,6 +31,18 @@ function assertProductionAuthSecret() {
 
 const recentVerificationEmailSentAt = new Map<string, number>();
 const VERIFICATION_EMAIL_MIN_INTERVAL_MS = 60_000;
+
+async function readRegistrationAllowlist(): Promise<string> {
+  try {
+    const rows = await db()
+      .select({ value: schema.config.value })
+      .from(schema.config)
+      .where(eq(schema.config.name, 'registration_allowlist'));
+    return rows[0]?.value || '';
+  } catch {
+    return '';
+  }
+}
 
 function getDatabaseProvider(provider: string): 'sqlite' | 'pg' | 'mysql' {
   switch (provider) {
@@ -209,6 +224,23 @@ export function getAuth(configs?: Record<string, string>) {
     }),
     socialProviders,
     plugins: getAuthPlugins(configs),
+    databaseHooks: {
+      user: {
+        create: {
+          before: async (user: { email?: string | null }) => {
+            const decision = newAccountDecision({
+              allowlist: await readRegistrationAllowlist(),
+              email: user?.email,
+            });
+            if (!decision.allow) {
+              throw new APIError('FORBIDDEN', {
+                message: '注册暂时关闭',
+              });
+            }
+          },
+        },
+      },
+    },
     user: {
       additionalFields: {
         utmSource: {

@@ -319,6 +319,14 @@ export function getSettings(): Setting[] {
       tab: 'auth',
       defaultValue: 'false',
     },
+    {
+      name: 'registration_allowlist',
+      title: 'Approved new-account emails',
+      type: 'textarea',
+      group: 'email_auth',
+      tab: 'auth',
+      tip: 'One email per line. Empty means no new account can be created. Adding an email admits only that person and does not reopen public signup.',
+    },
 
     // ─── Auth / Google ───────────────────────────────────────────────
     {
