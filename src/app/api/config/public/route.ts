@@ -52,5 +52,6 @@ export async function GET() {
     configs.email_verification_enabled === 'true' && emailConfigured
       ? 'true'
       : 'false';
+  result.registration_open = 'false';
   return respData(result, noStore);
 }

@@ -8,6 +8,8 @@
     "sign_in_description": "Welcome back",
     "sign_up_title": "Sign Up",
     "sign_up_description": "Get started for free",
+    "registration_closed_title": "Registration is temporarily closed",
+    "registration_closed_description": "New accounts are not open. If you already have an account, please sign in. Only an email that has already been approved can submit a registration; every other request is rejected.",
     "email_title": "Email",
     "email_placeholder": "Enter your email",
     "password_title": "Password",

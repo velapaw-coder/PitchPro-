@@ -8,6 +8,8 @@
     "sign_in_description": "欢迎回来",
     "sign_up_title": "注册",
     "sign_up_description": "免费开始使用",
+    "registration_closed_title": "注册暂时关闭",
+    "registration_closed_description": "新账号暂不开放。已有账号请登录。只有已单独批准的邮箱可以提交注册，其他请求会被拒绝。",
     "email_title": "邮箱",
     "email_placeholder": "输入邮箱地址",
     "password_title": "密码",

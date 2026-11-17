@@ -94,6 +94,7 @@ export default function SignUpPage() {
   const inviteCodeRequired = configs.invite_code_required === 'true';
   const hasSocial = googleEnabled || githubEnabled;
   const hasAnyMethod = emailEnabled || hasSocial;
+  const registrationOpen = configs.registration_open === 'true';
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -179,9 +180,30 @@ export default function SignUpPage() {
         <BrandLogo href="/" className="self-center" height={36} />
         <Card>
           <CardHeader className="text-center">
-            <CardTitle className="text-xl">{t('sign.sign_up_title')}</CardTitle>
+            <CardTitle className="text-xl">
+              {registrationOpen
+                ? t('sign.sign_up_title')
+                : t('sign.registration_closed_title')}
+            </CardTitle>
           </CardHeader>
           <CardContent>
+            {!registrationOpen && (
+              <div className="mb-4 space-y-3 text-center">
+                <p className="text-sm font-medium">
+                  {t('sign.registration_closed_title')}
+                </p>
+                <p className="text-muted-foreground text-sm">
+                  {t('sign.registration_closed_description')}
+                </p>
+                <Button
+                  type="button"
+                  className="w-full"
+                  onClick={() => router.push(`/sign-in${switchQuery}`)}
+                >
+                  {t('sign.sign_in_title')}
+                </Button>
+              </div>
+            )}
             {configsLoaded && !hasAnyMethod ? (
               <div className="rounded-lg border border-dashed p-6 text-center">
                 <p className="text-sm font-medium">
@@ -200,7 +222,7 @@ export default function SignUpPage() {
                     </div>
                   )}
 
-                  {hasSocial && (
+                  {registrationOpen && hasSocial && (
                     <Field>
                       {googleEnabled && (
                         <Button
@@ -243,7 +265,7 @@ export default function SignUpPage() {
                     </Field>
                   )}
 
-                  {hasSocial && emailEnabled && (
+                  {registrationOpen && hasSocial && emailEnabled && (
                     <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
                       {t('sign.or')}
                     </FieldSeparator>
