@@ -1,12 +1,12 @@
 import { respData } from '@/lib/resp';
 import { getAllConfigs, filterPublicConfigs } from '@/modules/config/service';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+// Soft-cacheable: public widget IDs only. Browser + shared caches may keep briefly.
+export const revalidate = 60;
 
-const noStore = {
+const publicCache = {
   headers: {
-    'Cache-Control': 'no-store, no-cache, must-revalidate',
+    'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=600',
   },
 };
 
@@ -30,12 +30,22 @@ const publicKeys = [
   'google_analytics_id',
   'plausible_domain',
   'plausible_src',
+  // Widget IDs are public by design (embedded in page scripts).
+  'crisp_enabled',
+  'crisp_website_id',
+  'tawk_enabled',
+  'tawk_property_id',
+  'tawk_widget_id',
 ];
 
 function isEmailSendingConfigured(configs: Record<string, string>): boolean {
   const provider = configs.email_provider || 'resend';
   if (provider === 'cloudflare') {
-    return !!configs.cloudflare_email_api_token && !!configs.cloudflare_email_account_id && !!configs.cloudflare_email_sender_email;
+    return (
+      !!configs.cloudflare_email_api_token &&
+      !!configs.cloudflare_email_account_id &&
+      !!configs.cloudflare_email_sender_email
+    );
   }
   return !!configs.resend_api_key && !!configs.resend_email_from;
 }
@@ -53,5 +63,5 @@ export async function GET() {
       ? 'true'
       : 'false';
   result.registration_open = 'false';
-  return respData(result, noStore);
+  return respData(result, publicCache);
 }
